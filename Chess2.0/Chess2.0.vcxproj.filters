@@ -72,9 +72,6 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PopupWindowRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowRenderer.h">
@@ -123,9 +120,6 @@
       <Filter>Header Files\GameState</Filter>
     </ClInclude>
     <ClInclude Include="GameOverState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PopupWindowRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

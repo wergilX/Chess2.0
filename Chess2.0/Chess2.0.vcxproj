@@ -152,7 +152,6 @@
     <ClCompile Include="BishopMoveStrategy.cpp" />
     <ClCompile Include="MovePieceState.cpp" />
     <ClCompile Include="PawnMoveStrategy.cpp" />
-    <ClCompile Include="PopupWindowRenderer.cpp" />
     <ClCompile Include="QueenMoveStrategy.cpp" />
     <ClCompile Include="RookMoveStrategy.cpp" />
     <ClCompile Include="SelectPieceState.cpp" />
@@ -173,7 +172,6 @@
     <ClInclude Include="KnightMoveStrategy.h" />
     <ClInclude Include="MovePieceState.h" />
     <ClInclude Include="PawnMoveStrategy.h" />
-    <ClInclude Include="PopupWindowRenderer.h" />
     <ClInclude Include="QueenMoveStrategy.h" />
     <ClInclude Include="RookMoveStrategy.h" />
     <ClInclude Include="SelectPieceState.h" />

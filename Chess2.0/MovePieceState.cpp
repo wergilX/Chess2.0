@@ -1,5 +1,5 @@
 ﻿#include "MovePieceState.h"
-#include "SelectPieceState.h"
+#include "GameOverState.h"
 #include "Game.h"
 #include <memory>
 #include <algorithm>
@@ -36,8 +36,8 @@ void MovePieceState::HandleInput(Game& game, int x, int y)
 			game.GetBoard().ClearPos({ m_selectedX, m_selectedY });
 		}
 
-		std::cout << "SelectState \n";
-		game.ChangeState(std::make_unique<SelectPieceState>());
+		std::cout << "GameOverState \n";
+		game.ChangeState(std::make_unique<GameOverState>());
 	}
 }
 
