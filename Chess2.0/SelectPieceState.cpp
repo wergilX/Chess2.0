@@ -10,7 +10,7 @@ const int TILE_SIZE = SCREEN_SIZE / 8;
 void SelectPieceState::HandleInput(Game& game, int x, int y)
 {
 	// todo
-	if (x > 0 && x < SCREEN_SIZE && y > 0 && y < SCREEN_SIZE)
+	if (x > 0 && x < SCREEN_SIZE && y > 0 && y < SCREEN_SIZE)// maybe dont need
 	{
 		int pos_x = x / TILE_SIZE;
 		int pos_y = y / TILE_SIZE;
@@ -31,10 +31,42 @@ void SelectPieceState::Update(Game& game)
 	{
 		return;
 	}
-	std::cout << "MoveState \n";
+	std::cout << "MovePieceState \n";
 	game.ChangeState(std::make_unique<MovePieceState>(m_figurePosX, m_figurePosY));
 }
 
 void SelectPieceState::Render(Game& game)
 {
+	for (size_t i = 0; i < game.GetBoard().GetAllBoard().size(); i++)
+	{
+		int pos_x = i % 8;// todo
+		int pos_y = i / 8;
+		std::string tileColor = (pos_x + pos_y) % 2 == 0 ? "dark_tile" : "light_tile";
+		// Determine tile color
+
+		SDL_FRect pos;
+		pos.w = TILE_SIZE;
+		pos.h = TILE_SIZE;
+		pos.x = TILE_SIZE * pos_x;
+		pos.y = TILE_SIZE * pos_y;
+
+		game.GetRenderer().Render(pos, tileColor);
+	}
+
+	for (size_t i = 0; i < game.GetBoard().GetAllBoard().size(); i++)
+	{
+		int pos_x = i % 8;// todo
+		int pos_y = i / 8;
+
+		int figure_type = game.GetBoard().GetFigureIdFromPos({ pos_x, pos_y });
+		if (figure_type == 0)
+			continue;
+
+		SDL_FRect pos;
+		pos.w = TILE_SIZE;
+		pos.h = TILE_SIZE;
+		pos.x = TILE_SIZE * pos_x;
+		pos.y = TILE_SIZE * pos_y;
+		game.GetRenderer().Render(pos, std::to_string(figure_type));
+	}
 }

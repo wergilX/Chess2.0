@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "WindowRenderer.h"
 #include "SelectPieceState.h"
+#include "PawnPromotionState.h"
 #include <string>
 
 const int SCREEN_SIZE = 640;
@@ -8,6 +9,7 @@ const int TILE_SIZE = SCREEN_SIZE / 8;
 
 Game::Game()
 {
+	//m_gameState = std::make_unique<PawnPromotionState>();
 	m_gameState = std::make_unique<SelectPieceState>();
 	LoadTextures();
 }
@@ -33,7 +35,7 @@ void Game::Update()
 void Game::Render()
 {
 	m_windowRenderer.Clear();
-	DrawBoard();
+	//DrawBoard();
 	m_gameState->Render(*this);
 	m_windowRenderer.Present();
 }
@@ -52,7 +54,6 @@ void Game::DrawBoard()
 {
 	for (size_t i = 0; i < m_board.GetAllBoard().size(); i++)
 	{
-
 		int pos_x = i % 8;// todo
 		int pos_y = i / 8;
 		std::string tileColor = (pos_x+pos_y) % 2 == 0 ? "dark_tile" : "light_tile";
@@ -67,7 +68,6 @@ void Game::DrawBoard()
 		m_windowRenderer.Render(pos, tileColor);
 	}
 
-
 	for (size_t i = 0; i < m_board.GetAllBoard().size(); i++)
 	{
 		int pos_x = i % 8;// todo
@@ -77,15 +77,11 @@ void Game::DrawBoard()
 		if (figure_type == 0)
 			continue;
 
-
 		SDL_FRect pos;
 		pos.w = TILE_SIZE;
 		pos.h = TILE_SIZE;
 		pos.x = TILE_SIZE * pos_x;
 		pos.y = TILE_SIZE * pos_y;
-
-		//pos.x = TILE_SIZE * pos_x + ((TILE_SIZE - TILE_SIZE) / 2) + TILE_SIZE /2;
-		//pos.y = TILE_SIZE * pos_y + ((TILE_SIZE - TILE_SIZE) / 2) + TILE_SIZE / 2;
 		m_windowRenderer.Render(pos, std::to_string(figure_type));
 	}
 }
@@ -95,22 +91,22 @@ void Game::LoadTextures()
 	//m_windowRenderer.GetTextureManager().Load("board", "..\\resources\\images\\board.png");
 	m_windowRenderer.GetTextureManager().Load("green_frame", "..\\resources\\images\\green_frame.png");
 	m_windowRenderer.GetTextureManager().Load("red_frame", "..\\resources\\images\\red_frame.png");
-	m_windowRenderer.GetTextureManager().Load("light_tile", "..\\resources\\images\\512h\\square brown light_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("dark_tile", "..\\resources\\images\\512h\\square brown dark_png_512px.png");
+	m_windowRenderer.GetTextureManager().Load("light_tile", "..\\resources\\images\\128h\\square brown light_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("dark_tile", "..\\resources\\images\\128h\\square brown dark_png_128px.png");
 
-	m_windowRenderer.GetTextureManager().Load("-1", "..\\resources\\images\\512h\\b_rook_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("-2", "..\\resources\\images\\512h\\b_knight_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("-3", "..\\resources\\images\\512h\\b_bishop_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("-4", "..\\resources\\images\\512h\\b_queen_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("-5", "..\\resources\\images\\512h\\b_king_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("-6", "..\\resources\\images\\512h\\b_pawn_png_512px.png");
+	m_windowRenderer.GetTextureManager().Load("-1", "..\\resources\\images\\128h\\b_rook_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("-2", "..\\resources\\images\\128h\\b_knight_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("-3", "..\\resources\\images\\128h\\b_bishop_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("-4", "..\\resources\\images\\128h\\b_queen_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("-5", "..\\resources\\images\\128h\\b_king_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("-6", "..\\resources\\images\\128h\\b_pawn_png_128px.png");
 
-	m_windowRenderer.GetTextureManager().Load("1", "..\\resources\\images\\512h\\w_rook_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("2", "..\\resources\\images\\512h\\w_knight_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("3", "..\\resources\\images\\512h\\w_bishop_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("4", "..\\resources\\images\\512h\\w_queen_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("5", "..\\resources\\images\\512h\\w_king_png_512px.png");
-	m_windowRenderer.GetTextureManager().Load("6", "..\\resources\\images\\512h\\w_pawn_png_512px.png");
+	m_windowRenderer.GetTextureManager().Load("1", "..\\resources\\images\\128h\\w_rook_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("2", "..\\resources\\images\\128h\\w_knight_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("3", "..\\resources\\images\\128h\\w_bishop_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("4", "..\\resources\\images\\128h\\w_queen_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("5", "..\\resources\\images\\128h\\w_king_png_128px.png");
+	m_windowRenderer.GetTextureManager().Load("6", "..\\resources\\images\\128h\\w_pawn_png_128px.png");
 }
 
 

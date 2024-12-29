@@ -1,9 +1,11 @@
 #include "GameOverState.h"
 #include "Game.h"
+
 #include <memory>
 #include <algorithm>
 #include <iostream>
 #include "SelectPieceState.h"
+#include "PawnPromotionState.h"
 
 void GameOverState::HandleInput(Game& game, int x, int y)
 {
@@ -22,12 +24,11 @@ void GameOverState::Update(Game& game)
 	}
 	else
 	{
-		std::cout << "SelectState \n";
-		game.ChangeState(std::make_unique<SelectPieceState>());
+		std::cout << "PawnPromotionState \n";
+		game.ChangeState(std::make_unique<PawnPromotionState>());
 	}
 }
 
 void GameOverState::Render(Game& game)
 {
-
 }
