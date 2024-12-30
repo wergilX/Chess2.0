@@ -34,12 +34,3 @@ int main(int argc, char* args[])
 
 	return 0;
 }
-
-
-/*
-*/
-
-/*
-* qestions
-* if ctr crashed class called dtr
-*/

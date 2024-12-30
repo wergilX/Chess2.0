@@ -1,6 +1,7 @@
 ﻿#include "SelectPieceState.h"
 #include "MovePieceState.h"
 #include "Game.h"
+#include "Player.h"
 #include <iostream>
 #include <math.h>
 
@@ -15,7 +16,7 @@ void SelectPieceState::HandleInput(Game& game, int x, int y)
 		int pos_x = x / TILE_SIZE;
 		int pos_y = y / TILE_SIZE;
 
-		std::cout << pos_x << "  " << pos_y << std::endl;
+		//std::cout << pos_x << "  " << pos_y << std::endl;
 		m_figurePosX = pos_x;
 		m_figurePosY = pos_y;
 	}
@@ -23,7 +24,7 @@ void SelectPieceState::HandleInput(Game& game, int x, int y)
 
 void SelectPieceState::Update(Game& game)
 {
-	if (m_figurePosX < 0)
+	if (m_figurePosX < 0)//todo
 		return;
 
 	int figureId = game.GetBoard().GetFigureIdFromPos({ m_figurePosX, m_figurePosY });
@@ -31,8 +32,13 @@ void SelectPieceState::Update(Game& game)
 	{
 		return;
 	}
-	std::cout << "MovePieceState \n";
-	game.ChangeState(std::make_unique<MovePieceState>(m_figurePosX, m_figurePosY));
+	else if(game.GetCurrentPlayer().side == PlayerSide::WHITE && figureId > 0 ||
+		game.GetCurrentPlayer().side == PlayerSide::BLACK && figureId < 0)
+	{
+		std::cout << "MovePieceState pos{x: " << m_figurePosX << " y: " << m_figurePosY << "}\n";
+		game.ChangePlayer();
+		game.ChangeState(std::make_unique<MovePieceState>(m_figurePosX, m_figurePosY));
+	}
 }
 
 void SelectPieceState::Render(Game& game)

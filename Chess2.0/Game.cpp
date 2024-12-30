@@ -3,13 +3,18 @@
 #include "SelectPieceState.h"
 #include "PawnPromotionState.h"
 #include <string>
+#include <iostream>
 
 const int SCREEN_SIZE = 640;
 const int TILE_SIZE = SCREEN_SIZE / 8;
 
 Game::Game()
 {
-	//m_gameState = std::make_unique<PawnPromotionState>();
+	// todo create menu
+	m_player1 = { PlayerType::HUMAN, PlayerSide::WHITE };
+	m_player2 = { PlayerType::AI, PlayerSide::BLACK };
+	m_currentPlayer = m_player1;
+	
 	m_gameState = std::make_unique<SelectPieceState>();
 	LoadTextures();
 }
@@ -40,6 +45,23 @@ void Game::Render()
 	m_windowRenderer.Present();
 }
 
+void Game::ChangePlayer()
+{
+	if (m_currentPlayer == m_player1)
+	{
+		m_currentPlayer = m_player2;
+	}
+	else
+	{
+		m_currentPlayer = m_player1;
+	}
+}
+
+Player Game::GetCurrentPlayer()
+{
+	return m_currentPlayer;
+}
+
 const WindowRenderer& Game::GetRenderer()
 {
 	return m_windowRenderer;
@@ -56,7 +78,7 @@ void Game::DrawBoard()
 	{
 		int pos_x = i % 8;// todo
 		int pos_y = i / 8;
-		std::string tileColor = (pos_x+pos_y) % 2 == 0 ? "dark_tile" : "light_tile";
+		std::string tileColor = (pos_x + pos_y) % 2 == 0 ? "dark_tile" : "light_tile";
 		// Determine tile color
 
 		SDL_FRect pos;
@@ -73,7 +95,7 @@ void Game::DrawBoard()
 		int pos_x = i % 8;// todo
 		int pos_y = i / 8;
 
-		int figure_type = m_board.GetFigureIdFromPos({pos_x, pos_y});
+		int figure_type = m_board.GetFigureIdFromPos({ pos_x, pos_y });
 		if (figure_type == 0)
 			continue;
 
